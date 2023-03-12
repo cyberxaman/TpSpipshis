@@ -45,6 +45,18 @@ echo "$BANNER"
 echo
 
 
+# Help function
+function help {
+    echo "Usage: $0 [OPTIONS]"
+    echo "Hide a secret message inside an image using steghide."
+    echo "Options:"
+    echo "  -m, --message MESSAGE       message to hide"
+    echo "  -c, --cover COVER_IMAGE     path to cover image"
+    echo "  -p, --password PASSWORD     password for encryption"
+    echo "  -o, --output OUTPUT_IMAGE   name for output image (default: secret.png)"
+    echo "  -h, --help                  display this help and exit"
+}
+
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     key="$1"
@@ -69,12 +81,22 @@ while [[ $# -gt 0 ]]; do
         shift # past argument
         shift # past value
         ;;
+        -h|--help)
+        help
+        exit 0
+        ;;
         *)    # unknown option
         echo "Unknown option: $1"
         exit 1
         ;;
     esac
 done
+
+# Display help if no arguments are provided
+if [[ -z "$message" && -z "$cover_image" && -z "$password" && -z "$output_image" ]]; then
+    help
+    exit 0
+fi
 
 # Prompt for message if not provided
 if [ -z "$message" ]; then
