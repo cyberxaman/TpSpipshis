@@ -76,6 +76,12 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# Display help if no arguments are provided
+if [[ -z "$message" && -z "$cover_image" && -z "$password" && -z "$output_image" ]]; then
+    help
+    exit 0
+fi
+
 # Prompt for secret image path if not provided
 if [ -z "$secret_image" ]; then
     read -p "Enter secret image path: " secret_image
