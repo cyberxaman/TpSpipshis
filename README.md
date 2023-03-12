@@ -10,29 +10,29 @@ chmod +x *
 ```
 
 
-#help
+# help
 ```bash
 ./Encoder.sh -h
 ```
 
-# hide message
+hide message
 ```bash
 bash Encode.sh
 ```
 
-# or 
+or 
 ```bash
 ./Encode.sh -i path_of_image -m "message" -o new_name_of_ image -p password
 ```
 
 
  
-# extract message from image
+extract message from image
 ```bash 
 bash Decode.sh
 ```
 
-# or 
+or 
 ```bash
 ./Decode.sh -i path_of_image -p password
 ```
