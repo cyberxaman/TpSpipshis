@@ -1,5 +1,5 @@
 # TpSpipshis
-Hide secret message in image with password
+Hide secret message in image with password in termux and linux
 
 
 # Installation
