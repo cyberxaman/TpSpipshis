@@ -44,16 +44,16 @@ clear
 echo "$BANNER"
 echo
 
+
 # Help function
 function help {
     echo "Usage: $0 [OPTIONS]"
     echo "Extract message from image."
     echo "Options:"
-    echo "  -c, --cover COVER_IMAGE     path to cover image"
+    echo "  -s, --secret SECRET_IMAGE   path to secret image"
     echo "  -p, --password PASSWORD     password for encryption"
     echo "  -h, --help                  display this help and exit"
 }
-
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -69,6 +69,10 @@ while [[ $# -gt 0 ]]; do
         shift # past argument
         shift # past value
         ;;
+        -h|--help)
+        help
+        exit 0
+        ;;
         *)    # unknown option
         echo "Unknown option: $1"
         exit 1
@@ -77,30 +81,15 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Display help if no arguments are provided
-if [[ -z "$message" && -z "$cover_image" && -z "$password" && -z "$output_image" ]]; then
+if [[ -z "$secret_image" || -z "$password" ]]; then
     help
     exit 0
-fi
-
-# Prompt for secret image path if not provided
-if [ -z "$secret_image" ]; then
-    read -p "Enter secret image path: " secret_image
 fi
 
 # Prompt for password if not provided
 if [ -z "$password" ]; then
     read -s -p "Enter password: " password
     echo
-fi
-
-# Check if the secret image and password were specified
-if [ -z "$secret_image" ]; then
-    echo "Secret image not specified."
-    exit 1
-fi
-if [ -z "$password" ]; then
-    echo "Password not specified."
-    exit 1
 fi
 
 # Extract the message
@@ -110,6 +99,15 @@ steghide extract -sf "$secret_image" -p "$password" -xf message.txt
 if [ $? -ne 0 ]; then
     echo "Failed to extract message."
     exit 1
+fi
+
+# Display the message
+echo "Message extracted from $secret_image:"
+cat message.txt
+
+# remove temporary file
+if [ -f message.txt ]; then
+    rm -f message.txt
 fi
 
 # Display the message
