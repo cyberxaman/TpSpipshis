@@ -44,6 +44,16 @@ clear
 echo "$BANNER"
 echo
 
+# Help function
+function help {
+    echo "Usage: $0 [OPTIONS]"
+    echo "Hide a secret message inside an image using steghide."
+    echo "Options:"
+    echo "  -c, --cover COVER_IMAGE     path to cover image"
+    echo "  -p, --password PASSWORD     password for encryption"
+    echo "  -h, --help                  display this help and exit"
+}
+
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
