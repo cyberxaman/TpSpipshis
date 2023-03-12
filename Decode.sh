@@ -47,7 +47,7 @@ echo
 # Help function
 function help {
     echo "Usage: $0 [OPTIONS]"
-    echo "Hide a secret message inside an image using steghide."
+    echo "Extract message from image."
     echo "Options:"
     echo "  -c, --cover COVER_IMAGE     path to cover image"
     echo "  -p, --password PASSWORD     password for encryption"
